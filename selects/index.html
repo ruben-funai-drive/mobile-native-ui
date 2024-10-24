@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Select Elements</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" />
+
+  <style>
+    html, body {
+      height: 100vh;
+      width: 100vw;
+      display: grid;
+      place-items: center;
+      margin: 0;
+    }
+
+    section {
+      padding: 0.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <p>
+        <em>
+          <strong id="message"></strong>
+        </em>
+      </p>
+    </section>
+    <form action="#" method="get">
+      <section>
+        <label for="height">How tall are you?</label>
+        <select id="height" required autocomplete="off">
+          <option value="">Please chose a height...</option>
+          <option value="0">less than 0.5m</option>
+          <option value="0.5">0.5m - 0.75m</option>
+          <option value="0.75">0.75m - 1m</option>
+          <option value="1">1m - 1.25m</option>
+          <option value="1.25">1.25m - 1.5m</option>
+          <option value="1.5">1.5m - 1.75m</option>
+          <option value="1.75">1.75m - 2m</option>
+          <option value="2">2m - 2.25m</option>
+          <option value="2.25">2.25m - 2.5m</option>
+          <option value="2.5">2.5m - 2.75m</option>
+          <option value="2.75">2.75m - 3m</option>
+          <option value="3">more than 3m</option>
+        </select>
+      </section>
+      <section>
+        <label for="nationality">What is your nationality?</label>
+        <select id="nationality" autocomplete="off">
+          <option value=""></option>
+          <option value="Australian">Australian</option>
+          <option value="Japanese">Japanese</option>
+          <option value="Colombian">Colombian</option>
+          <option value="Argentinian">Argentinian</option>
+          <option value="Canadian">Canadian</option>
+          <option value="North American">North American</option>
+          <option value="English">English</option>
+          <option value="Spanish">Spanish</option>
+          <option value="French">French</option>
+        </select>
+      </section>
+      <section>
+        <label for="favourite-fruit">What are your favourite fruits?</label>
+        <select id="favourite-fruit" multiple autocomplete="off">
+          <option value="Bananas">Bananas</option>
+          <option value="Oranges">Oranges</option>
+          <option value="Watermelon">Watermelon</option>
+          <option value="Lulo">Lulo</option>
+          <option value="Guava">Guava</option>
+          <option value="Soursop">Soursop</option>
+          <option value="Tomatoes">Tomatoes</option>
+          <option value="Pears">Pears</option>
+          <option value="Pineapple">Pineapple</option>
+        </select>
+      </section>
+      <section>
+        <label for="continent">Which continent do you live in?</label>
+        <select id="continent" autocomplete="off">
+          <option value="" selected></option>
+          <option value="Australia">Australia</option>
+          <option value="Asia">Asia</option>
+          <option value="Africa">Africa</option>
+          <optgroup label="Americas">
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+          </optgroup>
+          <option disabled value="Antarctica">Antarctica</option>
+          <option value="Europe">Europe</option>
+        </select>
+      </section>
+      <section>
+        <label for="year-of-birth">What year were you born in?</label>
+        <select id="year-of-birth" autocomplete="off">
+          <option value="" selected></option>
+        </select>
+      </section>
+      <section>
+        <label for="ice-cream-choice">What is your favourite flavor of ice cream? <em>(type or select one!)</em></label>
+        <input list="ice-cream-flavors" id="ice-cream-choice" name="ice-cream-choice" placeholder="Please provide a flavour..." required />
+
+        <datalist id="ice-cream-flavors">
+          <option value="Chocolate"></option>
+          <option value="Coconut"></option>
+          <option value="Mint"></option>
+          <option value="Strawberry"></option>
+          <option value="Vanilla"></option>
+        </datalist>
+      </section>
+      <section>
+        <div></div>
+        <button type="submit"><em>Submit!</em></button>
+      </section>
+    </form>
+  </main>
+  <script>
+    // Show the submission confirmation message
+    if (window.location.hash) {
+      document.querySelector('#message').innerHTML = 'The fake submission has been processed.<br />Feel free to fill in the form again.';
+      window.location.hash = '';
+    }
+
+    // Generate the year of birth options
+    const yearOfBirthSelect = document.querySelector('#year-of-birth');
+    const startYear = new Date().getFullYear() + 1;
+    const endYear = 1990;
+    const additionalYears = ['1980s', '1970s', '1960s']
+    for (let i = startYear; i >= endYear; i--) {
+      const option = document.createElement('option');
+      option.value = i;
+      option.innerHTML = i;
+      yearOfBirthSelect.append(option);
+    }
+
+    additionalYears.map((additionalYear) => {
+      const option = document.createElement('option');
+      option.value = additionalYear;
+      option.innerHTML = additionalYear;
+      yearOfBirthSelect.append(option);
+    });
+
+    // Create a fake submission ID
+    const formElement = document.querySelector('form');
+    formElement.setAttribute('action', '#' + new Date().getTime())
+  </script>
+</body>
+</html>
